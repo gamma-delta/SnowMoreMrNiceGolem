@@ -21,9 +21,9 @@ public class DamageChanges {
             evt.setAmount((float) newDamage);
         }
         if (target instanceof SnowGolem) {
-            var damageAllowed = SnowMoreConfig.getMaxSnowmanDamage(difficulty);
+            var damageAllowed = SnowMoreConfig.snowGolemMaxDamages.get(difficulty).get().floatValue();
             if (damageAllowed >= 0) {
-                evt.setAmount(Math.min((float) damageAllowed, evt.getAmount()));
+                evt.setAmount(Math.min(damageAllowed, evt.getAmount()));
             }
         }
     }

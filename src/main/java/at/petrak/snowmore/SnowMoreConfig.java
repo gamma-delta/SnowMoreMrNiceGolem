@@ -15,7 +15,7 @@ public class SnowMoreConfig {
         new EnumMap<>(Difficulty.class);
     private static final EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<Double>> defaultSnowballDamages =
         new EnumMap<>(Difficulty.class);
-    private static EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<Double>> snowGolemMaxDamages =
+    public static final EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<Double>> snowGolemMaxDamages =
         new EnumMap<>(Difficulty.class);
 
     public static Unit init(ForgeConfigSpec.Builder builder) {
@@ -59,10 +59,6 @@ public class SnowMoreConfig {
             }
         }
         return defaultSnowballDamages.get(difficulty).get();
-    }
-
-    public static double getMaxSnowmanDamage(Difficulty difficulty) {
-        return snowGolemMaxDamages.get(difficulty).get();
     }
 
     private static @Nullable Pair<ResourceLocation, Double> getDamage(String line) {
