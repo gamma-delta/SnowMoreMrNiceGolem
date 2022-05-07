@@ -1,6 +1,6 @@
 package at.petrak.snowmore;
 
-import at.petrak.snowmore.common.SnowballDamageBoost;
+import at.petrak.snowmore.common.DamageChanges;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -23,7 +23,7 @@ public class SnowMoreMod {
         // For everything else
         var evBus = MinecraftForge.EVENT_BUS;
 
-        evBus.register(SnowballDamageBoost.class);
+        evBus.register(DamageChanges.class);
 
         var configSpec = new ForgeConfigSpec.Builder().configure(SnowMoreConfig::init).getRight();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, configSpec);

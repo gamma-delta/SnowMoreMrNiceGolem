@@ -3,29 +3,52 @@ package at.petrak.snowmore;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
+import net.minecraft.world.Difficulty;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumMap;
 import java.util.List;
 
 public class SnowMoreConfig {
-    private static ForgeConfigSpec.ConfigValue<List<? extends String>> snowballDamage;
-    private static ForgeConfigSpec.ConfigValue<Double> defaultSnowballDamage;
+    private static final EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<List<? extends String>>> snowballDamages =
+        new EnumMap<>(Difficulty.class);
+    private static final EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<Double>> defaultSnowballDamages =
+        new EnumMap<>(Difficulty.class);
+    private static EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<Double>> snowGolemMaxDamages =
+        new EnumMap<>(Difficulty.class);
 
     public static Unit init(ForgeConfigSpec.Builder builder) {
-        snowballDamage = builder.comment(
-                "A list of entries defining how much damage a snowball does to the given entity.",
-                "The format is: `minecraft:entity damage`")
-            .defineList("snowballDamage", List.of("minecraft:blaze 3"),
-                o -> o instanceof String s && getDamage(s) != null);
-        defaultSnowballDamage = builder.comment("How much damage a snowball does to an entity not in the above list.")
-            .defineInRange("defaultSnowballDamage", 1d, 0d, Double.POSITIVE_INFINITY);
+        for (var difficulty : Difficulty.values()) {
+            builder.push(difficulty.getKey());
+
+            var snowballDamage = builder.comment(
+                    "A list of entries defining how much damage a snowball does to the given entity in " + difficulty.getKey() + " mode.",
+                    "The format is: `minecraft:entity damage`")
+                .defineList("snowballDamage", List.of("minecraft:blaze 3"),
+                    o -> o instanceof String s && getDamage(s) != null);
+            snowballDamages.put(difficulty, snowballDamage);
+
+            var defaultSnowballDamage = builder.comment(
+                    "How much damage a snowball does to an entity not in the above list in " + difficulty.getKey() + " mode.")
+                .defineInRange("defaultSnowballDamage", 1d, 0d, Double.POSITIVE_INFINITY);
+            defaultSnowballDamages.put(difficulty, defaultSnowballDamage);
+
+            var maxDamage = builder.comment(
+                    "The maximum amount of damage a snow golem can take from any attack in " + difficulty.getKey() + " mode.",
+                    "Set below 0 to allow any amount of damage.")
+                .defineInRange("snowGolemMaxDamage", -1.0, -1.0, Double.POSITIVE_INFINITY);
+            snowGolemMaxDamages.put(difficulty, maxDamage);
+
+            builder.pop();
+        }
 
         return Unit.INSTANCE;
     }
 
-    public static double getSnowballDamageFor(ResourceLocation entity) {
-        for (var s : snowballDamage.get()) {
+    public static double getSnowballDamageFor(ResourceLocation entity, Difficulty difficulty) {
+        var dmges = snowballDamages.get(difficulty);
+        for (var s : dmges.get()) {
             var entry = getDamage(s);
             if (entry == null) {
                 SnowMoreMod.LOGGER.warn("Invalid snowball damage entry made its way past the validator?! {}", s);
@@ -35,7 +58,11 @@ public class SnowMoreConfig {
                 return entry.getSecond();
             }
         }
-        return defaultSnowballDamage.get();
+        return defaultSnowballDamages.get(difficulty).get();
+    }
+
+    public static double getMaxSnowmanDamage(Difficulty difficulty) {
+        return snowGolemMaxDamages.get(difficulty).get();
     }
 
     private static @Nullable Pair<ResourceLocation, Double> getDamage(String line) {
