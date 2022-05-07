@@ -17,6 +17,8 @@ public class SnowMoreConfig {
         new EnumMap<>(Difficulty.class);
     public static final EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<Double>> snowGolemMaxDamages =
         new EnumMap<>(Difficulty.class);
+    public static final EnumMap<Difficulty, ForgeConfigSpec.ConfigValue<Boolean>> snowballDoIFrames =
+        new EnumMap<>(Difficulty.class);
 
     public static Unit init(ForgeConfigSpec.Builder builder) {
         for (var difficulty : Difficulty.values()) {
@@ -39,6 +41,11 @@ public class SnowMoreConfig {
                     "Set below 0 to allow any amount of damage.")
                 .defineInRange("snowGolemMaxDamage", -1.0, -1.0, Double.POSITIVE_INFINITY);
             snowGolemMaxDamages.put(difficulty, maxDamage);
+
+            var iframe = builder.comment(
+                    "Whether snowballs should still cause invincibility frames in " + difficulty.getKey() + " mode.")
+                .define("snowballDoIFrames", true);
+            snowballDoIFrames.put(difficulty, iframe);
 
             builder.pop();
         }
