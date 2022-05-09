@@ -4,5 +4,7 @@
     "advancement.snowmore:hit_friend": "And a Dash of Assorted Debris",
     "advancement.snowmore:hit_friend.desc": "Hit a friend with a snowball",
     "advancement.snowmore:maskless": "Snowcial Distancing",
-    "advancement.snowmore:maskless.desc": "Kill a snow golem that isn't wearing its pumpkin with a snowball"
+    "advancement.snowmore:maskless.desc": "Kill a snow golem that isn't wearing its pumpkin with a snowball",
+    "advancement.snowmore:bosses": "Boss Flurry",
+    "advancement.snowmore:bosses.desc": "Deal the killing blow on all three bosses with a snowball"
 }

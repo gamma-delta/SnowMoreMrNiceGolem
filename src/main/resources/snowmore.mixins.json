@@ -5,6 +5,6 @@
     "refmap": "snowmore.mixins.refmap.json",
     "package": "at.petrak.snowmore.mixin",
     "mixins": [
-        "ItemStackMixin"
+        "SnowballMixin"
     ]
 }

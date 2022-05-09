@@ -15,14 +15,10 @@ public class DamageChanges {
         var target = evt.getEntity();
         Difficulty difficulty = target.level.getDifficulty();
 
-        if (damageSource instanceof IndirectEntityDamageSource ieds && ieds.getDirectEntity() instanceof Snowball) {
-            var newDamage = SnowMoreConfig.getSnowballDamageFor(target.getType().getRegistryName(),
-                difficulty);
-            evt.setAmount((float) newDamage);
-
-            if (!SnowMoreConfig.snowballDoIFrames.get(difficulty).get()) {
-                target.invulnerableTime = 0;
-            }
+        if (damageSource instanceof IndirectEntityDamageSource ieds
+            && ieds.getDirectEntity() instanceof Snowball
+            && !SnowMoreConfig.snowballDoIFrames.get(difficulty).get()) {
+            target.invulnerableTime = 0;
         }
         if (target instanceof SnowGolem) {
             var damageAllowed = SnowMoreConfig.snowGolemMaxDamages.get(difficulty).get().floatValue();

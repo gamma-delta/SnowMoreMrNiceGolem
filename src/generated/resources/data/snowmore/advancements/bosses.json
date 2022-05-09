@@ -1,0 +1,91 @@
+{
+  "parent": "snowmore:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:snowball"
+    },
+    "title": {
+      "translate": "advancement.snowmore:bosses"
+    },
+    "description": {
+      "translate": "advancement.snowmore:bosses.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "minecraft:ender_dragon": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "minecraft:ender_dragon"
+            },
+            "entity": "this"
+          }
+        ],
+        "killing_blow": {
+          "direct_entity": {
+            "type": "minecraft:snowball"
+          }
+        }
+      }
+    },
+    "minecraft:wither": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "minecraft:wither"
+            },
+            "entity": "this"
+          }
+        ],
+        "killing_blow": {
+          "direct_entity": {
+            "type": "minecraft:snowball"
+          }
+        }
+      }
+    },
+    "minecraft:elder_guardian": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "minecraft:elder_guardian"
+            },
+            "entity": "this"
+          }
+        ],
+        "killing_blow": {
+          "direct_entity": {
+            "type": "minecraft:snowball"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "minecraft:ender_dragon"
+    ],
+    [
+      "minecraft:wither"
+    ],
+    [
+      "minecraft:elder_guardian"
+    ]
+  ]
+}

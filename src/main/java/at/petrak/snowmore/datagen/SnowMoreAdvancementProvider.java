@@ -3,6 +3,7 @@ package at.petrak.snowmore.datagen;
 import at.petrak.paucal.api.datagen.PaucalAdvancementProvider;
 import at.petrak.snowmore.SnowMoreMod;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.DataGenerator;
@@ -52,5 +53,21 @@ public class SnowMoreAdvancementProvider extends PaucalAdvancementProvider {
             .addCriterion("evil", KilledTrigger.TriggerInstance.playerKilledEntity(
                 snowmanPred.get().nbt(new NbtPredicate(masklessTag)), snowballPred.get()))
             .save(consumer, modLoc("maskless"), fileHelper);
+
+        var bosses = Advancement.Builder.advancement()
+            .display(simpleDisplay(Items.SNOWBALL, "bosses", FrameType.CHALLENGE))
+            .parent(root);
+        var bossTypes = new EntityType<?>[]{
+            EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.ELDER_GUARDIAN
+        };
+        for (var type : bossTypes) {
+            bosses.addCriterion(EntityType.getKey(type).toString(), KilledTrigger.TriggerInstance.playerKilledEntity(
+                EntityPredicate.Builder.entity().of(type),
+                snowballPred.get()
+            ));
+        }
+        bosses
+            .rewards(AdvancementRewards.Builder.experience(100))
+            .save(consumer, modLoc("bosses"), fileHelper);
     }
 }
