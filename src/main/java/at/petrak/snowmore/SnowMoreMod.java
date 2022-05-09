@@ -1,6 +1,7 @@
 package at.petrak.snowmore;
 
 import at.petrak.snowmore.common.DamageChanges;
+import at.petrak.snowmore.datagen.SnowMoreDatagen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -22,6 +23,8 @@ public class SnowMoreMod {
         var modBus = FMLJavaModLoadingContext.get().getModEventBus();
         // For everything else
         var evBus = MinecraftForge.EVENT_BUS;
+
+        modBus.register(SnowMoreDatagen.class);
 
         evBus.register(DamageChanges.class);
 

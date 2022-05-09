@@ -1,0 +1,45 @@
+{
+  "parent": "snowmore:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:pumpkin"
+    },
+    "title": {
+      "translate": "advancement.snowmore:maskless"
+    },
+    "description": {
+      "translate": "advancement.snowmore:maskless.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "evil": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "minecraft:snow_golem",
+              "nbt": "{Pumpkin:0b}"
+            },
+            "entity": "this"
+          }
+        ],
+        "killing_blow": {
+          "direct_entity": {
+            "type": "minecraft:snowball"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "evil"
+    ]
+  ]
+}

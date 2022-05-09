@@ -1,0 +1,8 @@
+{
+    "advancement.snowmore:root": "Snow More Mr. Nice Golem",
+    "advancement.snowmore:root.desc": "Summon a snow golem with a carved pumpkin on top of two snow blocks",
+    "advancement.snowmore:hit_friend": "And a Dash of Assorted Debris",
+    "advancement.snowmore:hit_friend.desc": "Hit a friend with a snowball",
+    "advancement.snowmore:maskless": "Snowcial Distancing",
+    "advancement.snowmore:maskless.desc": "Kill a snow golem that isn't wearing its pumpkin with a snowball"
+}
