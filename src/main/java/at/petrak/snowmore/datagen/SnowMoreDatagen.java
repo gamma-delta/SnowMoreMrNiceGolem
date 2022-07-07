@@ -1,5 +1,6 @@
 package at.petrak.snowmore.datagen;
 
+import at.petrak.paucal.api.forge.datagen.PaucalForgeDatagenWrappers;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
@@ -10,7 +11,7 @@ public class SnowMoreDatagen {
         var efh = evt.getExistingFileHelper();
 
         if (evt.includeServer()) {
-            gen.addProvider(new SnowMoreAdvancementProvider(gen, efh));
+            gen.addProvider(PaucalForgeDatagenWrappers.addEFHToAdvancements(new SnowMoreAdvancementProvider(gen), efh));
         }
     }
 }

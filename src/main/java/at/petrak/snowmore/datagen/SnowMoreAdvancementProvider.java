@@ -11,19 +11,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class SnowMoreAdvancementProvider extends PaucalAdvancementProvider {
-    public SnowMoreAdvancementProvider(DataGenerator generatorIn,
-        ExistingFileHelper fileHelperIn) {
-        super(generatorIn, fileHelperIn, SnowMoreMod.MOD_ID);
+    public SnowMoreAdvancementProvider(DataGenerator generatorIn) {
+        super(generatorIn, SnowMoreMod.MOD_ID);
     }
 
     @Override
-    protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
+    protected void makeAdvancements(Consumer<Advancement> consumer) {
         Supplier<EntityPredicate.Builder> snowmanPred = () -> EntityPredicate.Builder.entity()
             .of(EntityType.SNOW_GOLEM);
         Supplier<DamageSourcePredicate.Builder> snowballPred = () -> DamageSourcePredicate.Builder.damageType().direct(
