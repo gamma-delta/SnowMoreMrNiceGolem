@@ -1,23 +1,7 @@
 {
   "parent": "snowmore:root",
-  "display": {
-    "icon": {
-      "item": "minecraft:player_head"
-    },
-    "title": {
-      "translate": "advancement.snowmore:hit_friend"
-    },
-    "description": {
-      "translate": "advancement.snowmore:hit_friend.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "calvin": {
-      "trigger": "minecraft:player_hurt_entity",
       "conditions": {
         "damage": {
           "type": {
@@ -29,13 +13,29 @@
         "entity": [
           {
             "condition": "minecraft:entity_properties",
+            "entity": "this",
             "predicate": {
               "type": "minecraft:player"
-            },
-            "entity": "this"
+            }
           }
         ]
-      }
+      },
+      "trigger": "minecraft:player_hurt_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.snowmore:hit_friend.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:player_head"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.snowmore:hit_friend"
     }
   },
   "requirements": [

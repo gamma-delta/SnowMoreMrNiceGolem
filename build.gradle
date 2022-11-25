@@ -73,7 +73,7 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 minecraft {
     // After running this the first time, switch which is commented and rerun genIntellijRuns
     // mappings channel: 'official', version: '1.18.2'
-    mappings channel: 'parchment', version: '2022.03.13-1.18.2'
+    mappings channel: 'parchment', version: '2022.11.20-1.19.2'
 
     runs {
         client {
