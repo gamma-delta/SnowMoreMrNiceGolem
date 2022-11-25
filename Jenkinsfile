@@ -24,8 +24,8 @@ pipeline {
         }
         stage('Publish') {
             when { anyOf {
-                { branch 'main' }
-                { branch '1.18' }
+                branch 'main'
+                branch '1.18'
             } }
             steps {
                 echo 'Deploying to Maven'
